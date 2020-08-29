@@ -84,6 +84,65 @@ ID  | Name              | Type                    | State    | Reading    | Unit
 120 | Voltage 2         | Voltage                 | Nominal  | 230.00     | V     | 'OK'
 121 | System Level      | Current                 | Nominal  | 273.00     | W     | 'OK'
 ```
+Tabla 1.1 - De este listado nos interesa los datos Type e ID
+
+```
+administrador@Server:~$ sudo ipmi-sensors -L
+[sudo] contraseña para administrador: 
+Chassis
+Chip_Set
+Other_Fru
+Cable_Interconnect
+Terminator
+System_Boot_Initiated
+Boot_Error
+OS_Boot
+OS_Critical_Stop
+Slot_Connector
+System_ACPI_Power_State
+Watchdog_2
+Platform_Alert
+Entity_Presence
+Monitor_ASIC_IC
+LAN
+Management_Subsystem_Health
+Battery
+Session_Audit
+Version_Change
+FRU_State
+OEM_Reserved
+Temperature
+Voltage
+Current
+Fan
+Physical_Security
+Platform_Security_Violation_Attempt
+Processor
+Power_Supply
+Power_Unit
+Cooling_Device
+Other_Units_Based_Sensor
+Memory
+Drive_Slot
+POST_Memory_Resize
+System_Firmware_Progress
+Event_Logging_Disabled
+Watchdog_1
+System_Event
+Critical_Interrupt
+Button_Switch
+Module_Board
+Microcontroller_Coprocessor
+Add_In_Card
+```
+Tabla 1.2 - De la ayuda de ipmi-sensors =>   -L, --list-sensor-types    List sensor types.
+
+Con estas dos imagenes extraemos que, en la implementacion de IPMI con la que cuenta nuestro sistema, podremos monitorear por “tipo” solo aquellos que esten presentes tanto en la imagen 1,1 y 1,2 y utilizaremos el texto de la imagen 1.2. Para todos los que no deseemos usar “agrupacion” utilizaremos el ID.
+
+TIP!
+> **Para no tener que usar sudo en los comandos derivados de IPMIsel podemos agregar los mismos a sudoers de la siguiente forma:**
+> ```sudo vi /etc/sudoers.d/check_ipmi_sensor
+nagios ALL=(root) NOPASSWD: /usr/sbin/ipmi-sensors, /usr/sbin/ipmi-sel```
 
 You can use the [editor on GitHub](https://github.com/garsiv1932/nagios-ipmi/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
