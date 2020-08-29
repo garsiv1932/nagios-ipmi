@@ -148,7 +148,129 @@ sudo vi /etc/sudoers.d/check_ipmi_sensor
 nagios ALL=(root) NOPASSWD: /usr/sbin/ipmi-sensors, /usr/sbin/ipmi-sel
 ```
 
-You can use the [editor on GitHub](https://github.com/garsiv1932/nagios-ipmi/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Antes de proceder con la configuracion del plugin en Nagios chequearemos desde consola:
+```
+administrador@Server:~$ ipmi-sensors -t Power_Supply
+ID | Name          | Type         | Reading    | Units | Event
+45 | Status        | Power Supply | N/A        | N/A   | 'Presence detected'
+46 | Status        | Power Supply | N/A        | N/A   | 'Presence detected'
+50 | PS Redundancy | Power Supply | N/A        | N/A   | 'Fully Redundant'
+
+```
+Ahora que ya verificamos la existencia de IPMI en nuestro sistema,que descargamos el plugin de Thomas Krenn y que instalamos las aplicaciones necesarias y verificamos el correcto funcionamiento de las mismas con nuestro entorno,  procederemos a explicar la configuracion de Nagios.
+
+Aqui tenemos que elegir entre dos opciones, por un lado podemos crear comandos IPMI y por otro utilizaremos NRPE. Para la primera deberemos definir en nuestro archivos /usr/local/nagios/etc/objects/commands.cfg. 
+Esta configuracion es para el caso del uso de IPMI a nivel local:
+
+```
+define command{
+  command_name  check_ipmi_fan
+  command_line  $USER1$/check_ipmi_sensor -T FAN $
+}
+```
+
+Y en nuesgtro objeto /usr/local/nagios/etc/objects/linux.cfg
+```
+define host{
+  use              linux-server
+  host_name     centos4
+  alias             centos4
+  address         192.168.1.151
+ 
+ define service{
+  use                         generic-service
+  host_name               centos4
+  service_description     IPMI
+  check_command        check_ipmi_fan
+}
+  
+```
+
+En el caso de que habilitemos IPMI over LAN deberemos cambiar esta configuracion a:
+/usr/local/nagios/etc/objects/commands.cfg
+
+```
+define command{
+  command_name  check_ipmi_fan
+  command_line  $USER1$/check_ipmi_sensor -H $_HOSTIPMI_IP$ -f $ARG1$ -b -T FAN
+}
+```
+```
+define host{
+  use           linux-server
+  host_name     centos4
+  alias         centos4
+  address       192.168.1.151
+  _ipmi_ip      192.168.1.211
+}
+
+define service{
+  use                  generic-service
+  host_name            centos4
+  service_description  IPMI
+  check_command        check_ipmi_fan!/etc/ipmi-config/ipmi.cfg -b -T FAN
+}
+
+```
+
+```
+cat /etc/ipmi-config/ipmi.cfg
+username monitoring
+password ao5$snNc!
+privilege-level user
+ipmi-sensors-workaround-flags nochecksumcheck,noauthcodecheck
+
+```
+
+Si optamos por la utiliuzacion de NRPE (es la opcion que mas me gusta a mi) deberemos aplicar las siguientes configuraciones:
+En el servidor, en nuestro objeto **/usr/local/nagios/etc/objects/linux.cfg**:
+
+```
+define service{
+        use                     generic-service
+        host_name               Server
+        service_description     IPMI Power Supply
+        check_command           check_nrpe!check_power_supply -t 45
+}
+
+define service{
+        use                     generic-service
+        host_name               Server
+        service_description     IPMI Redundancy
+        check_command           check_nrpe!check_redundancy -t 45
+}
+
+define service{
+        use                     generic-service
+        host_name               Server
+        service_description     IPMI PS1
+        check_command           check_nrpe!check_ps1 -t 45
+}
+
+define service{
+        use                     generic-service
+        host_name               Server
+        service_description     IPMI PS2
+        check_command           check_nrpe!check_ps2 -t 45
+}
+```
+**En el cliente, en el archivo /usr/local/nagios/etc/nrpe.cfg:**
+
+```
+command[check_fans]=/usr/local/nagios/libexec/check_ipmi_sensor -T FAN --nosel
+command[check_power_supply]=/usr/local/nagios/libexec/check_ipmi_sensor -T Power_Supply --nosel
+command[check_redundancy]=/usr/local/nagios/libexec/check_ipmi_sensor -i 50 --nosel
+command[check_ps1]=/usr/local/nagios/libexec/check_ipmi_sensor -i 45 --nosel
+command[check_ps2]=/usr/local/nagios/libexec/check_ipmi_sensor -i 46 --nosel
+```
+
+**(*)[--nosel]
+       turn off system event log checking via ipmi-sel. If there are
+       unintentional entries in SEL, use 'ipmi-sel --clear'.
+Esto es debido a que IPMI guarda las caidas de sistema en algo parecido a un event log y con --nosel accedemos al estado actual del dispositivo que estamos monitoreando. No me queda claro si al hacer 'ipmi-sel --clear' la limpeza se hace en el “event log” del servidor (idrac) o es a nivel de “local” (OS). 
+You can use the [editor on GitHub](https://github.com/garsiv1932/nagios-ipmi/edit/master/README.md) to maintain and preview the content for your website in Markdown files.**
+
+
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
