@@ -139,11 +139,13 @@ Tabla 1.2 - De la ayuda de ipmi-sensors =>   -L, --list-sensor-types    List sen
 
 Con estas dos imagenes extraemos que, en la implementacion de IPMI con la que cuenta nuestro sistema, podremos monitorear por “tipo” solo aquellos que esten presentes tanto en la imagen 1,1 y 1,2 y utilizaremos el texto de la imagen 1.2. Para todos los que no deseemos usar “agrupacion” utilizaremos el ID.
 
-TIP!
-> **Para no tener que usar sudo en los comandos derivados de IPMIsel podemos agregar los mismos a sudoers de la siguiente forma:**
+RECORDAR!
+``` 
+**Para no tener que usar sudo en los comandos derivados de IPMIsel podemos agregar los mismos a sudoers de la siguiente forma:**
 
-> ```sudo vi /etc/sudoers.d/check_ipmi_sensor
-nagios ALL=(root) NOPASSWD: /usr/sbin/ipmi-sensors, /usr/sbin/ipmi-sel```
+sudo vi /etc/sudoers.d/check_ipmi_sensor
+nagios ALL=(root) NOPASSWD: /usr/sbin/ipmi-sensors, /usr/sbin/ipmi-sel
+```
 
 You can use the [editor on GitHub](https://github.com/garsiv1932/nagios-ipmi/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
