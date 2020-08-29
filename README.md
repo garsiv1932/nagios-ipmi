@@ -273,11 +273,11 @@ Esto es debido a que IPMI guarda las caidas de sistema en algo parecido a un eve
 Resultado:
 
 SERVICES DOWN
-![Error](https://github.com/garsiv1932/nagios-ipmi/blob/master/error.jpeg)
+![Error](https://github.com/garsiv1932/nagios-ipmi/blob/master/error.jpeg?raw=true)
 
 
 SERVICES UP
-![Success](https://github.com/garsiv1932/nagios-ipmi/blob/master/success.jpeg)
+![Success](https://github.com/garsiv1932/nagios-ipmi/blob/master/success.jpeg?raw=true)
 
 
 **Este Documento debe tener muchos detalles, ademas de que para ser completo le faltaria que alguien haga estas pruebas con ILO de HP, quien quiera colaborar sera bien recibido.**
