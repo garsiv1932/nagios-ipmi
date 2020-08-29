@@ -282,6 +282,24 @@ SERVICES UP
 
 **Este Documento debe tener muchos detalles, ademas de que para ser completo le faltaria que alguien haga estas pruebas con ILO de HP, quien quiera colaborar sera bien recibido.**
 
+## REFERENCIAS
+
+¿Qué es IPMI ?¿Como funciona?
+http://informatica.iesvalledeljerteplasencia.es/wordpress/que-es-ipmi-como-funciona/
+Consultado por última vez : 28/08/2020.
+
+Object Inheritance
+https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/3/en/objectinheritance.html
+Consultado por última vez : 26/08/2020.
+
+RACADM Install
+http://linux.dell.com/repo/community/openmanage/
+Consultado por última vez : 26/08/2020.
+
+IPMI Sensor Monitoring Plugin setup
+https://www.thomas-krenn.com/en/wiki/IPMI_Sensor_Monitoring_Plugin_setup
+Consultado por última vez : 29/08/2020.
+
 **Para la edicion seria interesante seguir los mismos parametros de edicion de GITHUB de los siguientes documentos:**
 
 [GitHub Syntax](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
