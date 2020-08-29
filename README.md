@@ -141,6 +141,7 @@ Con estas dos imagenes extraemos que, en la implementacion de IPMI con la que cu
 
 TIP!
 > **Para no tener que usar sudo en los comandos derivados de IPMIsel podemos agregar los mismos a sudoers de la siguiente forma:**
+
 > ```sudo vi /etc/sudoers.d/check_ipmi_sensor
 nagios ALL=(root) NOPASSWD: /usr/sbin/ipmi-sensors, /usr/sbin/ipmi-sel```
 
