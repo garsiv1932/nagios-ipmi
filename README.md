@@ -270,6 +270,16 @@ command[check_ps2]=/usr/local/nagios/libexec/check_ipmi_sensor -i 46 --nosel
 Esto es debido a que IPMI guarda las caidas de sistema en algo parecido a un event log y con --nosel accedemos al estado actual del dispositivo que estamos monitoreando. No me queda claro si al hacer 'ipmi-sel --clear' la limpeza se hace en el “event log” del servidor (idrac) o es a nivel de “local” (OS). **
 
 
+Resultado:
+
+SERVICES DOWN
+![Error](https://github.com/garsiv1932/nagios-ipmi/blob/master/error.jpeg)
+
+
+SERVICES UP
+![Success](https://github.com/garsiv1932/nagios-ipmi/blob/master/success.jpeg)
+
+
 **Este Documento debe tener muchos detalles, ademas de que para ser completo le faltaria que alguien haga estas pruebas con ILO de HP, quien quiera colaborar sera bien recibido.**
 
 **Para la edicion seria interesante seguir los mismos parametros de edicion de GITHUB de los siguientes documentos:**
