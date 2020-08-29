@@ -25,13 +25,13 @@ En este documento daremos por descontado que el lector ya cuenta con conocimient
 
 ## DELL
 
-En esta parte del  manual esta basada en IDRAC6 y a la espera de que alguien nos colabore con las ventajas de IDRAC 7, 8 y 9.
+En esta parte del  manual está basada en IDRAC6 y a la espera de que alguien nos colabore con las ventajas de IDRAC 7, 8 y 9.
 
-IPMI es un estandar que los fabricantes implementan de forma particular para sus sistemas, por lo que estos no tienen porque ofrecer interoperabilidad entre ellos.
-De esta forma, IPMI puede ser accedido/consultado tanto de formal local o mediante LAN. Por cuestiones de seguridad, la operacion por intermedio de LAN esta deshabilitada por defecto. Para el acceso/operacion local, en el caso de DELL, se puede hacer mediante una aplicacion de consola llamada RACADM. Con esta aplicacion podemos configrar en la interfaz IDRAC, cosas tales como direccion IP, usuario de IDRAC, Contraseña, y habilitar o deshabilitar el acceso mediante LAN a IPMI (el acceso local esta habilitado por defecto). 
-Mediante IPMI podemos tener acceso a diferentes datos del servidor que podremos configurar dentro de NAGIOS para configurar nuestro sistema de alarmas. Para esto nos valdremos del plugin para DELL ofrecido por la empresa alemana “Thomas-Krenn“ (https://exchange.nagios.org/directory/Plugins/Hardware/Server-Hardware/IPMI-Sensor-Monitoring-Plugin/details).
+IPMI es un estándar que los fabricantes implementan de forma particular para sus sistemas, por lo que estos no tienen por qué ofrecer interoperabilidad entre ellos.
+De esta forma, IPMI puede ser accedido/consultado tanto de formal local o mediante LAN. Por cuestiones de seguridad, la operación por intermedio de LAN esta deshabilitada por defecto. Para el acceso/operación local, en el caso de DELL, se puede hacer mediante una aplicación de consola llamada RACADM. Con esta aplicación podemos configurar en la interfaz IDRAC, cosas tales como dirección IP, usuario de IDRAC, Contraseña, y habilitar o deshabilitar el acceso mediante LAN a IPMI (el acceso local está habilitado por defecto). 
+Mediante IPMI podemos tener acceso a diferentes datos del servidor que podremos configurar dentro de NAGIOS para configurar nuestro sistema de alarmas. Para esto nos valdremos del plugin para DELL ofrecido por la empresa alemana “Thomas-Krenn“ ([Plugin Details](https://exchange.nagios.org/directory/Plugins/Hardware/Server-Hardware/IPMI-Sensor-Monitoring-Plugin/details)).
 
-A continuacion describire el proceso de instalacion de dependencias. En mi caso mi sistema de referencia es UBUNTU, anuque la adaptacion a otras distros no deberia representar un problema.
+A continuación describiré el proceso de instalación de dependencias. En mi caso mi sistema de referencia es UBUNTU, aunque la adaptación a otras distros no debería representar un problema.
 
 ###### Dependencias
 * Nagios
@@ -44,7 +44,7 @@ tar -zxf check_ipmi_sensor_v3-master.zip
 cp  check_ipmi_sensor_v3-master/check_ipmi_sensor /usr/bin/nagios/libexec/
 
 ###### Configuracion
-Ahora tendremos que obtener algunos datos para utillizar con nuestro plugin, que son los id de los objetos que queremos monnitorear.
+Ahora tendremos que obtener algunos datos para utilizar con nuestro plugin, que son los id de los objetos que queremos monnitorear.
 ```
 sudo ipmimonitoring 
 [sudo] contraseña para administrador: 
@@ -137,7 +137,7 @@ Add_In_Card
 ```
 Tabla 1.2 - De la ayuda de ipmi-sensors =>   -L, --list-sensor-types    List sensor types.
 
-Con estas dos imagenes extraemos que, en la implementacion de IPMI con la que cuenta nuestro sistema, podremos monitorear por “tipo” solo aquellos que esten presentes tanto en la imagen 1,1 y 1,2 y utilizaremos el texto de la imagen 1.2. Para todos los que no deseemos usar “agrupacion” utilizaremos el ID.
+Con estas dos imágenes extraemos que, en la implementación de IPMI con la que cuenta nuestro sistema, podremos monitorear por “tipo” solo aquellos que estén presentes tanto en la imagen 1,1 y 1,2 y utilizaremos el texto de la imagen 1.2. Para todos los que no deseemos usar “agrupación” utilizaremos el ID.
 
 RECORDAR!
 ``` 
@@ -148,7 +148,7 @@ sudo vi /etc/sudoers.d/check_ipmi_sensor
 nagios ALL=(root) NOPASSWD: /usr/sbin/ipmi-sensors, /usr/sbin/ipmi-sel
 ```
 
-Antes de proceder con la configuracion del plugin en Nagios chequearemos desde consola:
+Antes de proceder con la configuración del plugin en Nagios chequearemos desde consola:
 ```
 administrador@Server:~$ ipmi-sensors -t Power_Supply
 ID | Name          | Type         | Reading    | Units | Event
@@ -157,10 +157,10 @@ ID | Name          | Type         | Reading    | Units | Event
 50 | PS Redundancy | Power Supply | N/A        | N/A   | 'Fully Redundant'
 
 ```
-Ahora que ya verificamos la existencia de IPMI en nuestro sistema,que descargamos el plugin de Thomas Krenn y que instalamos las aplicaciones necesarias y verificamos el correcto funcionamiento de las mismas con nuestro entorno,  procederemos a explicar la configuracion de Nagios.
+Ahora que ya verificamos la existencia de IPMI en nuestro sistema, que descargamos el plugin de Thomas Krenn y que instalamos las aplicaciones necesarias y verificamos el correcto funcionamiento de las mismas con nuestro entorno,  procederemos a explicar la configuración de Nagios.
 
-Aqui tenemos que elegir entre dos opciones, por un lado podemos crear comandos IPMI y por otro utilizaremos NRPE. Para la primera deberemos definir en nuestro archivos /usr/local/nagios/etc/objects/commands.cfg. 
-Esta configuracion es para el caso del uso de IPMI a nivel local:
+Aqui tenemos que elegir entre dos opciones, por un lado podemos crear comandos IPMI y por otro utilizaremos NRPE. Para la primera deberemos definir en nuestro archivo /usr/local/nagios/etc/objects/commands.cfg. 
+Esta configuración es para el caso del uso de IPMI a nivel local:
 
 ```
 define command{
@@ -169,7 +169,7 @@ define command{
 }
 ```
 
-Y en nuesgtro objeto /usr/local/nagios/etc/objects/linux.cfg
+Y en nuestro objeto /usr/local/nagios/etc/objects/linux.cfg
 ```
 define host{
   use              linux-server
@@ -186,7 +186,7 @@ define host{
   
 ```
 
-En el caso de que habilitemos IPMI over LAN deberemos cambiar esta configuracion a:
+En el caso de que habilitemos IPMI over LAN deberemos cambiar esta configuración a:
 /usr/local/nagios/etc/objects/commands.cfg
 
 ```
@@ -222,7 +222,7 @@ ipmi-sensors-workaround-flags nochecksumcheck,noauthcodecheck
 
 ```
 
-Si optamos por la utiliuzacion de NRPE (es la opcion que mas me gusta a mi) deberemos aplicar las siguientes configuraciones:
+Si optamos por la utilización de NRPE (es la opción que más me gusta a mí) deberemos aplicar las siguientes configuraciones:
 En el servidor, en nuestro objeto **/usr/local/nagios/etc/objects/linux.cfg**:
 
 ```
@@ -276,6 +276,6 @@ You can use the [editor on GitHub](https://github.com/garsiv1932/nagios-ipmi/edi
 
 **Para la edicion seria interesante seguir los mismos parametros de edicion de GITHUB de los siguientes documentos:**
 
-[GitHub](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
+[GitHub Syntax](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
 
 
