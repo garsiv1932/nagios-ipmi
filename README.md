@@ -268,8 +268,6 @@ command[check_ps2]=/usr/local/nagios/libexec/check_ipmi_sensor -i 46 --nosel
        turn off system event log checking via ipmi-sel. If there are
        unintentional entries in SEL, use 'ipmi-sel --clear'.
 Esto es debido a que IPMI guarda las caidas de sistema en algo parecido a un event log y con --nosel accedemos al estado actual del dispositivo que estamos monitoreando. No me queda claro si al hacer 'ipmi-sel --clear' la limpeza se hace en el “event log” del servidor (idrac) o es a nivel de “local” (OS). 
-You can use the [editor on GitHub](https://github.com/garsiv1932/nagios-ipmi/edit/master/README.md) to maintain and preview the content for your website in Markdown files.**
-
 
 
 **Este Documento debe tener muchos detalles, ademas de que para ser completo le faltaria que alguien haga estas pruebas con ILO de HP, quien quiera colaborar sera bien recibido.**
@@ -277,5 +275,3 @@ You can use the [editor on GitHub](https://github.com/garsiv1932/nagios-ipmi/edi
 **Para la edicion seria interesante seguir los mismos parametros de edicion de GITHUB de los siguientes documentos:**
 
 [GitHub Syntax](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
-
-
