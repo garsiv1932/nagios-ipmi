@@ -1,4 +1,27 @@
-## Welcome to GitHub Pages
+## ¿Qué es IPMI (Intelligent Platform Management Interface)?
+
+
+Es un gestor de interfaz que nos permite gestionar servidores con independencia de
+sistemas operativos y tipos de CPU. 
+¿Cómo Funciona?
+Funciona con independencia del sistema operativo, los administradores pueden acceder a los
+sistemas y restablecerlos aún en el caso de que el sistema operativo no responda.
+¿Qué ventajas me puede aportar esta plataforma?
+Algunas de las ventajas que nos pueden aportar esta plataforma de interfaz son:
+Fácil acceso y administración.
+Rápida Opción para reinicio remoto, apagado y encendido instantáneo para evitar tiempo
+fuera de línea.
+Capacidad de recuperación remota (utilizando la conexión LAN existente, sin importar el
+estado del sistema).
+Monitoreo del estado del hardware que ayuda a prevenir fallos.
+Independiente al servidor, siempre disponible.
+IPMI trabaja con cualquier sistema operativo.
+KVM dedicado sobre IP bajo demanda 24/7.
+Reduce tus costos de administración y es gratis en todos nuestros servidores.
+¿Qué es KVM (Kernel-based Virtual Machine,Máquina virtual basada en el núcleo)?
+Es una solución para implementar virtualización completa con Linux. Permite ejecutar máquinas virtuales utilizando imágenes de disco que contienen sistemas operativos sin modificar.
+
+En este documento daremos por descontado que el lector ya cuenta con conocimientos de NAGIOS y NRPE.
 
 You can use the [editor on GitHub](https://github.com/garsiv1932/nagios-ipmi/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
