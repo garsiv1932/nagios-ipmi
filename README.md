@@ -7,7 +7,7 @@ sistemas operativos y tipos de CPU.
 Funciona con independencia del sistema operativo, los administradores pueden acceder a los
 sistemas y restablecerlos aún en el caso de que el sistema operativo no responda.
 ¿Qué ventajas me puede aportar esta plataforma?
-Algunas de las ventajas que nos pueden aportar esta plataforma de interfaz son:
+Algunas de las ventajas que nos puede aportar esta plataforma son:
 
 * Fácil acceso y administración.
 * Rápida Opción para reinicio remoto, apagado y encendido instantáneo para evitar tiempo fuera de línea.
