@@ -26,6 +26,7 @@ En este documento daremos por descontado que el lector ya cuenta con conocimient
 ## DELL
 
 En esta parte del  manual está basada en IDRAC6 y a la espera de que alguien nos colabore con las ventajas de IDRAC 7, 8 y 9.
+Gracias a @Charstark sabemos que con este mismo manual y un poco de "maña" pudo implementar IPMI en un HP con ILO.
 
 IPMI es un estándar que los fabricantes implementan de forma particular para sus sistemas, por lo que estos no tienen por qué ofrecer interoperabilidad entre ellos.
 De esta forma, IPMI puede ser accedido/consultado tanto de formal local o mediante LAN. Por cuestiones de seguridad, la operación por intermedio de LAN esta deshabilitada por defecto. Para el acceso/operación local, en el caso de DELL, se puede hacer mediante una aplicación de consola llamada RACADM. Con esta aplicación podemos configurar en la interfaz IDRAC, cosas tales como dirección IP, usuario de IDRAC, Contraseña, y habilitar o deshabilitar el acceso mediante LAN a IPMI (el acceso local está habilitado por defecto). 
